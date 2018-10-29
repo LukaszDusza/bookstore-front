@@ -5,6 +5,7 @@ import { HomeComponent } from '../home/home.component';
 import { BooksComponent } from '../books/books.component';
 import { AppComponent } from '../app.component';
 import { AddBookComponent } from '../add-book/add-book.component';
+import { UpdateBookComponent } from '../update-book/update-book.component';
 
 
 const appRoutes: Routes = [
@@ -22,7 +23,7 @@ const appRoutes: Routes = [
     },
     {
         path: "update",
-        component: AddBookComponent,
+        component: UpdateBookComponent,
     },
     {
         path: "",
