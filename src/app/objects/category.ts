@@ -1,5 +1,5 @@
 
-export interface Category {
+export class Category {
     title: String;
     books: []
 }

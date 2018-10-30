@@ -10,7 +10,11 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { MainService } from './main.service';
 import { AddBookComponent } from './add-book/add-book.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,8 @@ import { UpdateBookComponent } from './update-book/update-book.component';
     BooksComponent,
     AddBookComponent,
     UpdateBookComponent,
-   
+    NavigationComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -27,6 +32,12 @@ import { UpdateBookComponent } from './update-book/update-book.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    
+   
+    NgxSpinnerModule,
+    BrowserAnimationsModule,  
+    Ng2GoogleChartsModule
+   
   ],
   providers: [MainService],
   bootstrap: [AppComponent]

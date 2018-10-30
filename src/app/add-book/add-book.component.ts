@@ -12,17 +12,10 @@ export class AddBookComponent implements OnInit{
 
   constructor(private mainService: MainService) { }
 
-  ngOnInit() {
-this.getCategory();
-  
-   }
+  ngOnInit() { }
 
   addBook() {
     this.mainService.addBook(this.mainService.book);   
-  }
-
-  getCategory() {
-    this.mainService.getCategory();
   }
 
 }

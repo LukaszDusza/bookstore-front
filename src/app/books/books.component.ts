@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MainService } from '../main.service';
 import { Book } from '../objects/book';
 
@@ -7,19 +7,34 @@ import { Book } from '../objects/book';
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.css']
 })
-export class BooksComponent implements OnInit {
+export class BooksComponent implements OnInit, OnChanges {
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // this.getBooks();
+    console.log("ngOnChanges");
+  }
+
+  public data: any;
 
   title: String = "BookComponent works!";
-
-
+  
   constructor(private mainService: MainService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.mainService.books.length < 1) {
+      this.getBooks();
+    }
+  }
 
   updateBook(book: Book) {
     this.mainService.book = book;
     this.mainService.actualIsbn = book.isbn;
-    console.log(this.mainService.book);
+    // console.log(this.mainService.book);
+  }
+
+  getBooks() {
+    this.mainService.getBooks();
   }
 
   deleteBook(isbn: String) {
@@ -27,6 +42,7 @@ export class BooksComponent implements OnInit {
     //  console.log(isbn);
   }
 
-
-
 }
+
+
+
