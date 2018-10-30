@@ -12,11 +12,15 @@ export class UpdateBookComponent implements OnInit {
   constructor(private mainService: MainService) { }
 
   ngOnInit() {
+    this.getCategory()
   }
 
-  updateBook(book: Book) {
-  //  this.book = book;
-    console.log(book);
+  updateBook() {
+  this.mainService.updateBook(this.mainService.actualIsbn, this.mainService.book);
+  }
+
+  getCategory() {
+    this.mainService.getCategory();
   }
 
 }

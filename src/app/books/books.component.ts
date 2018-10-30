@@ -18,6 +18,7 @@ export class BooksComponent implements OnInit {
 
   updateBook(book: Book) {
     this.mainService.book = book;
+    this.mainService.actualIsbn = book.isbn;
     console.log(this.mainService.book);
   }
 

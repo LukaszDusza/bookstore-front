@@ -10,6 +10,7 @@ export class MainService {
 
   books = new Array<Book>();
   categories = new Array<Category>();
+  actualIsbn: string = "";
 
   constructor(private http: HttpClient) { }
 
@@ -36,6 +37,14 @@ export class MainService {
   }
 
   addBook(book: Book) {
+    
+    this.book = {
+      title: "",
+      author: "",
+      isbn: "",
+      category: ""
+    };
+
     let result = this.http.post(this.host + 'books', book).subscribe(res => {
       // console.log(res);
     })
@@ -48,9 +57,8 @@ export class MainService {
   }
 
   updateBook(isbn: string, book: Book) {
-    const formData = new FormData();
-    formData.append("isbn", isbn)
-    this.http.put(this.host + 'books', book).subscribe(r => {
+      console.log(isbn, book);
+    this.http.put(this.host + 'books/' + isbn, book).subscribe(r => {
       //  console.log(r)
     }, err => { }, () => { })
 
