@@ -4,7 +4,6 @@ import { Category } from './objects/category';
 import { Book } from './objects/book';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
-import { Serie } from './objects/serie';
 
 const url = environment.config.host;
 
@@ -32,10 +31,10 @@ export class MainService {
         this.books.push(r);
       })
     }, err => {
-      //  console.log(err);
+      console.log(err);
     }, () => {
       this.getCategories();
-      this.getChart();
+        this.getChart();
       this.spinner.hide();
     })
   }
@@ -58,7 +57,8 @@ export class MainService {
     }, err => { }, () => { })
   }
 
-  getSelectedCategory(event) {
+  getSelectedCategory(event) { //(change)
+    console.log(event);
     this.book.category = event.target.value;
   }
 
@@ -70,7 +70,7 @@ export class MainService {
         this.categories.push(r);
       })
     }, err => { }, () => {
-     
+
     })
 
   }
@@ -83,7 +83,7 @@ export class MainService {
     let counter = 0;
 
     books.map(b => arrayCat.push(b.category));
-
+    console.log(arrayCat);
     for (let i = 0; i < books.length; i++) {
       let book = books[i];
       if (!objs[book.category]) {
@@ -103,13 +103,13 @@ export class MainService {
     }
     array.unshift(["Category", "Number"]);
 
-    console.log(array);
+      console.log(array);
     return array;
   }
 
   getChart() {
     this.chart = {
-      chartType: 'PieChart',
+      chartType: 'BarChart',
       dataTable: this.getBooksToChartArray(this.books),
       options: {
         'legend': 'none',

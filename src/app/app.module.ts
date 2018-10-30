@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { UploadsComponent } from './uploads/uploads.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
     AddBookComponent,
     UpdateBookComponent,
     NavigationComponent,
+    UploadsComponent,
   
   ],
   imports: [

@@ -6,6 +6,7 @@ import { BooksComponent } from '../books/books.component';
 import { AppComponent } from '../app.component';
 import { AddBookComponent } from '../add-book/add-book.component';
 import { UpdateBookComponent } from '../update-book/update-book.component';
+import { UploadsComponent } from '../uploads/uploads.component';
 
 
 const appRoutes: Routes = [
@@ -20,6 +21,10 @@ const appRoutes: Routes = [
     {
         path: "add",
         component: AddBookComponent,
+    },
+    {
+        path: "uploads",
+        component: UploadsComponent,
     },
     {
         path: "update",
