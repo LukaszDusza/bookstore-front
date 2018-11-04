@@ -16,6 +16,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { UploadsComponent } from './uploads/uploads.component';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth.service';
+import { AuthGuardService } from './auth-guard.service';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,8 @@ import { UploadsComponent } from './uploads/uploads.component';
     UpdateBookComponent,
     NavigationComponent,
     UploadsComponent,
+    LoginComponent,
+    LogoutComponent,
   
   ],
   imports: [
@@ -41,7 +47,14 @@ import { UploadsComponent } from './uploads/uploads.component';
     Ng2GoogleChartsModule
    
   ],
-  providers: [MainService],
+  providers: [
+    MainService, 
+    AuthService, 
+    AuthGuardService,
+    {provide: 'AUTH_TOKEN', useValue: 'token'},
+    {provide: 'AUTH_USER', useValue: 'user'}
+  ],
+  exports: [LogoutComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

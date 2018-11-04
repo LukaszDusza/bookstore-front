@@ -7,28 +7,40 @@ import { AppComponent } from '../app.component';
 import { AddBookComponent } from '../add-book/add-book.component';
 import { UpdateBookComponent } from '../update-book/update-book.component';
 import { UploadsComponent } from '../uploads/uploads.component';
+import { LoginComponent } from '../login/login.component';
+import { AuthGuardService } from '../auth-guard.service';
+import { LogoutComponent } from '../logout/logout.component';
 
 
 const appRoutes: Routes = [
     {
         path: "home",
-        component: HomeComponent,
+        component: HomeComponent, 
+      //  canActivate: [AuthGuardService],
     },
     {
         path: "books",
-        component: BooksComponent,
+        component: BooksComponent, canActivate: [AuthGuardService],
     },
     {
         path: "add",
-        component: AddBookComponent,
+        component: AddBookComponent, canActivate: [AuthGuardService],
     },
     {
         path: "uploads",
-        component: UploadsComponent,
+        component: UploadsComponent, canActivate: [AuthGuardService],
     },
     {
         path: "update",
-        component: UpdateBookComponent,
+        component: UpdateBookComponent, canActivate: [AuthGuardService],
+    },
+    {
+        path: "login",
+        component: LoginComponent,
+    },
+    {
+        path: "logout",
+        component: LogoutComponent,
     },
     {
         path: "",

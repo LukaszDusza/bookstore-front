@@ -1,0 +1,23 @@
+<div class="container">
+  <form #loginForm="ngForm" class="form-signin" (ngSubmit)="login(loginForm)">
+    <div class="alert alert-primary" role="alert">
+      <!-- <p>
+        Email: <b>test@test.com</b>
+      </p>
+      <p>
+        Password: <b>password</b>
+      </p> -->
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage && loginForm.submitted">
+      Wrong credentials!
+    </div>
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <label for="inputLogin" class="sr-only">Login</label>
+    <input type="login" id="inputLogin" class="form-control" placeholder="login" name="login" required autofocus
+           ngModel>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required
+           ngModel>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form>
+</div>

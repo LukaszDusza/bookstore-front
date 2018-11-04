@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MainService } from '../main.service';
 import { Book } from '../objects/book';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-books',
@@ -19,11 +20,11 @@ export class BooksComponent implements OnInit, OnChanges {
 
   title: String = "BookComponent works!";
   
-  constructor(private mainService: MainService) { }
+  constructor(private mainService: MainService, private auth: AuthService) { }
 
   ngOnInit() {
     if (this.mainService.books.length < 1) {
-      this.getBooks();
+      this.getBooks();   
     }
   }
 
