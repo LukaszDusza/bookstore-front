@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Category } from './objects/category';
 import { Book } from './objects/book';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
 
-const url = environment.config.host;
+const url = environment.config.api;
 
 @Injectable({
   providedIn: 'root'
@@ -16,43 +16,43 @@ export class MainService {
   book: Book = new Book();
   actualIsbn: string = "";
   categories = new Array<Category>();
-  host: String = 'http://localhost:8080/api/v1/';
-  chart;
-
+ 
+  chart; 
   constructor(private http: HttpClient, private spinner: NgxSpinnerService) { }
 
   getBooks() {
     this.spinner.show();
     this.books = [];
     this.categories = [];
-    let result = this.http.get<Array<Book>>(url).subscribe(res => {
+  
+    this.http.get<Array<Book>>(url + "books").subscribe(res => {
       res.map(r => {
-        //  console.log(r);
         this.books.push(r);
       })
-    }, err => {
+    }, (err) => {
+      this.spinner.hide();
       console.log(err);
     }, () => {
       this.getCategories();
-        this.getChart();
+      this.getChart();
       this.spinner.hide();
     })
   }
 
   addBook(book: Book) {
-    this.http.post(url, book).subscribe(res => {
+    this.http.post(url + "books", book).subscribe(res => {
     })
   }
 
   deleteBook(isbn: String) {
-    this.http.delete(url + "?isbn=" + isbn).subscribe(r => {
+    this.http.delete(url + "books?isbn=" + isbn).subscribe(r => {
       //  console.log(r)
     }, err => { }, () => this.getBooks())
   }
 
   updateBook(isbn: string, book: Book) {
     //  console.log(isbn, book);
-    this.http.put(url + "?isbn=" + isbn, book).subscribe(r => {
+    this.http.put(url + "books?isbn=" + isbn, book).subscribe(r => {
       //  console.log(r)
     }, err => { }, () => { })
   }
@@ -64,7 +64,7 @@ export class MainService {
 
   getCategories() {
     this.categories = [];
-    let result = this.http.get<Array<Category>>(this.host + "categories").subscribe(res => {
+    let result = this.http.get<Array<Category>>(url + "categories").subscribe(res => {
       res.map(r => {
         //   console.log(r);
         this.categories.push(r);
@@ -103,7 +103,7 @@ export class MainService {
     }
     array.unshift(["Category", "Number"]);
 
-      console.log(array);
+    console.log(array);
     return array;
   }
 

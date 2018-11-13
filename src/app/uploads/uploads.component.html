@@ -9,10 +9,14 @@
             <div class="alert alert-default" role="alert" *ngIf="showResult">{{result}} </div>
   
         <div class="form-group">
-        <input class="form-control" type="file" name="file" id="upload" (change)="onSelected($event)" #fileInput>
+        <input class="form-control" multiple type="file" name="file" id="upload" (change)="onSelected($event)" #fileInput #filepreview>
       </div>    
       <button type="button" class="btn btn-sm btn-default" (click)="onUpload()">upload</button>
     </div>
+
+    <div class="col-md-6">
+      <img [src]="filepreview" class="img-responsive" ng-show="filepreview"/>
+   </div>
     
     <div class="col-md-6">       
         <table class="table table-stripped table-responsive-md">
@@ -25,8 +29,9 @@
         
           <tbody>
           <tr *ngFor="let f of fileList">
-            <td>{{f.title}}</td>                               
-            <!-- <td><button type="button" class="btn btn-sm btn-default" (click)="onDelete(f.title)">delete</button> </td>          -->
+            <td>{{f.name}}</td> 
+            <td><img [src]="f.fullPath" class="img-responsive"/></td>                              
+            <td><button type="button" class="btn btn-sm btn-default" (click)="onDelete(f.name)">delete</button> </td>
           </tr>
         </tbody>
         </table>

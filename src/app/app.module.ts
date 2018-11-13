@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
 import { LogoutComponent } from './logout/logout.component';
+import { AuthInterceptor } from './auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -36,12 +37,11 @@ import { LogoutComponent } from './logout/logout.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule,
     
-   
     NgxSpinnerModule,
     BrowserAnimationsModule,  
     Ng2GoogleChartsModule
@@ -51,8 +51,13 @@ import { LogoutComponent } from './logout/logout.component';
     MainService, 
     AuthService, 
     AuthGuardService,
-    {provide: 'AUTH_TOKEN', useValue: 'token'},
-    {provide: 'AUTH_USER', useValue: 'user'}
+    // {provide: 'AUTH_TOKEN', useValue: 'token'},
+    // {provide: 'AUTH_USER', useValue: 'user'},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   exports: [LogoutComponent],
   bootstrap: [AppComponent]

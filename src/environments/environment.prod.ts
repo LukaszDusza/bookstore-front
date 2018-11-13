@@ -3,7 +3,8 @@
 export const environment = {
   production: true,
   config: {
-    host: "http://77.55.219.133:8080/bookstore/api/v1/books",
-    login: "http://77.55.219.133:8081/bookstore/login"
+    api: "http://77.55.219.133:8080/bookstore/api/v1/",
+    login: "http://77.55.219.133:8080/bookstore/login",
+    uploads: "http://localhost:8080/files/upload"
   }
 };

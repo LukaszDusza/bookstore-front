@@ -1,9 +1,9 @@
 export class User {
-    firstName: string;
-    lastName: string;
+    username: String;
+    password: String;
   
-    constructor(user?: any) {
-      this.firstName = user && user.firstName || null;
-      this.lastName = user && user.lastName || null;
-    }
+    // constructor(user?: any) {
+    //   this.username = user && user.firstName || null;
+    //   this.password = user && user.lastName || null;
+    // }
   }

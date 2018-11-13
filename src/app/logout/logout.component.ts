@@ -13,13 +13,13 @@ export class LogoutComponent implements OnInit {
   user: User;
 
   constructor(private auth: AuthService, private router: Router) {
-    this.user = auth.getUser();
+  //  this.user = auth.getUser();
    }
 
-   logout() {
-    this.auth.logout();
-    this.router.navigateByUrl('login');
-  }
+  //  logout() {
+  //   this.auth.logout();
+  //   this.router.navigateByUrl('login');
+  // }
 
   ngOnInit() {
   }

@@ -5,8 +5,9 @@
 export const environment = {
   production: false,
   config: {
-    host: "http://localhost:8080/api/v1/books",
-    login: "http://localhost:8081/login"
+    api: "http://localhost:8080/api/v1/",
+    login: "http://localhost:8080/login",
+    uploads: "http://localhost:8080/files/upload"
   }
 };
 

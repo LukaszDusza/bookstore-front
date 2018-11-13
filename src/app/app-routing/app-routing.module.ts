@@ -16,23 +16,27 @@ const appRoutes: Routes = [
     {
         path: "home",
         component: HomeComponent, 
-      //  canActivate: [AuthGuardService],
+        canActivate: [AuthGuardService],
     },
     {
         path: "books",
-        component: BooksComponent, canActivate: [AuthGuardService],
+        component: BooksComponent, 
+        canActivate: [AuthGuardService],
     },
     {
         path: "add",
-        component: AddBookComponent, canActivate: [AuthGuardService],
+        component: AddBookComponent, 
+        canActivate: [AuthGuardService],
     },
     {
         path: "uploads",
-        component: UploadsComponent, canActivate: [AuthGuardService],
+        component: UploadsComponent, 
+        canActivate: [AuthGuardService],
     },
     {
         path: "update",
-        component: UpdateBookComponent, canActivate: [AuthGuardService],
+        component: UpdateBookComponent, 
+        canActivate: [AuthGuardService],
     },
     {
         path: "login",
