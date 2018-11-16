@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class UpdateBookComponent implements OnInit, OnChanges {
 
-  constructor(private mainService: MainService, private router: Router) { }
+  constructor(public mainService: MainService, private router: Router) { }
 
   ngOnInit() { }
 

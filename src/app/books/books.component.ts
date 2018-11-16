@@ -13,19 +13,19 @@ export class BooksComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     // this.getBooks();
-    console.log("ngOnChanges");
+  //  console.log("ngOnChanges");
   }
 
   public data: any;
 
   title: String = "BookComponent works!";
   
-  constructor(private mainService: MainService, private auth: AuthService) { }
+  constructor(public mainService: MainService, public auth: AuthService) { }
 
   ngOnInit() {
-    if (this.mainService.books.length < 1) {
-      this.getBooks();   
-    }
+     if (this.mainService.books.length < 1) {
+       this.getAllBooks();   
+     }
   }
 
   updateBook(book: Book) {
@@ -38,10 +38,25 @@ export class BooksComponent implements OnInit, OnChanges {
     this.mainService.getBooks();
   }
 
+  getChart() {
+    this.mainService.getChart()
+  }
+
+  getAllBooks() {
+    this.mainService.getAllBooks();
+  }
+
   deleteBook(isbn: String) {
     this.mainService.deleteBook(isbn);
     //  console.log(isbn);
   }
+
+  saveToXLS() {
+    this.mainService.saveToXLS(this.mainService.books);
+  }
+
+
+  getPDF() { }
 
 }
 

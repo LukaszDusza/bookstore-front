@@ -10,7 +10,7 @@ import { CodegenComponentFactoryResolver } from '@angular/core/src/linker/compon
 })
 export class AddBookComponent implements OnInit{
 
-  constructor(private mainService: MainService) { }
+  constructor(public mainService: MainService) { }
 
   ngOnInit() { }
 

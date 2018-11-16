@@ -10,7 +10,7 @@ export class AuthGuardService implements CanActivate {
 
   private loggedIn = false;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(public auth: AuthService, private router: Router) {
 
     this.auth.isLoggedId().subscribe((loggedId: boolean) => {
       this.loggedIn = loggedId;

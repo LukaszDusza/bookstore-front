@@ -10,6 +10,7 @@ import { UploadsComponent } from '../uploads/uploads.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthGuardService } from '../auth-guard.service';
 import { LogoutComponent } from '../logout/logout.component';
+import { MyfilesComponent } from '../myfiles/myfiles.component';
 
 
 const appRoutes: Routes = [
@@ -36,6 +37,11 @@ const appRoutes: Routes = [
     {
         path: "update",
         component: UpdateBookComponent, 
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: "myfiles",
+        component: MyfilesComponent, 
         canActivate: [AuthGuardService],
     },
     {

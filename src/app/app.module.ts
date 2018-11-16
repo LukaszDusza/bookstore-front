@@ -21,6 +21,9 @@ import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
 import { LogoutComponent } from './logout/logout.component';
 import { AuthInterceptor } from './auth-interceptor';
+import { FilterService } from './filter.service';
+import { FiltersComponent } from './filters/filters.component';
+import { MyfilesComponent } from './myfiles/myfiles.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { AuthInterceptor } from './auth-interceptor';
     UploadsComponent,
     LoginComponent,
     LogoutComponent,
+    FiltersComponent,
+    MyfilesComponent,
   
   ],
   imports: [
@@ -51,6 +56,7 @@ import { AuthInterceptor } from './auth-interceptor';
     MainService, 
     AuthService, 
     AuthGuardService,
+    FilterService,
     // {provide: 'AUTH_TOKEN', useValue: 'token'},
     // {provide: 'AUTH_USER', useValue: 'user'},
     {

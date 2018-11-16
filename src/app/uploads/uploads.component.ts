@@ -11,7 +11,7 @@ const url = environment.config.uploads;
   styleUrls: ['./uploads.component.css']
 })
 export class UploadsComponent implements OnInit {
-  constructor(private http: HttpClient, private mainService: MainService) { }
+  constructor(private http: HttpClient, public mainService: MainService) { }
   
   showResult: boolean = false;
   fileList = new Array<MyFile>();
@@ -66,6 +66,13 @@ export class UploadsComponent implements OnInit {
            
     }
 
+    onDelete(name: string) {
+      this.http.delete(url + "/" + name).subscribe(file => {
+         console.log(file);       
+       }, err => {}, () => {
+         this.showFiles();
+       }); 
+    }
 }
 
 export class MyFile {

@@ -8,6 +8,9 @@ export const environment = {
     api: "http://localhost:8080/api/v1/",
     login: "http://localhost:8080/login",
     uploads: "http://localhost:8080/files/upload"
+    // api: "http://77.55.219.133:8080/bookstore/api/v1/",
+    // login: "http://77.55.219.133:8080/bookstore/login",
+    // uploads: "http://77.55.219.133:8080/bookstore/files/upload"
   }
 };
 

@@ -12,7 +12,7 @@ export class LogoutComponent implements OnInit {
 
   user: User;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(public auth: AuthService, private router: Router) {
   //  this.user = auth.getUser();
    }
 

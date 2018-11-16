@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
 
   home: String = 'Welcome to HomeComponent!';
 
-  constructor(private auth: AuthService) { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit() { }
 

@@ -4,6 +4,10 @@ import { Category } from './objects/category';
 import { Book } from './objects/book';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
+import { Myfile } from './objects/myfiles';
+import { saveAs } from 'file-saver';
+
+
 
 const url = environment.config.api;
 
@@ -16,15 +20,24 @@ export class MainService {
   book: Book = new Book();
   actualIsbn: string = "";
   categories = new Array<Category>();
- 
-  chart; 
+  authors = new Array<String>();
+
+  chart;
   constructor(private http: HttpClient, private spinner: NgxSpinnerService) { }
 
-  getBooks() {
+  getBooks(value?: string) {
+
+    this.getAllBooks();
+
+    this.getCategories();
+    this.getAuthors();
+    this.getChart();
+
+  }
+
+  getAllBooks() {
     this.spinner.show();
     this.books = [];
-    this.categories = [];
-  
     this.http.get<Array<Book>>(url + "books").subscribe(res => {
       res.map(r => {
         this.books.push(r);
@@ -34,8 +47,59 @@ export class MainService {
       console.log(err);
     }, () => {
       this.getCategories();
-      this.getChart();
+      this.getAuthors();
       this.spinner.hide();
+    })
+  }
+
+  getBooksByCategory(value: string) {
+    this.spinner.show();
+    this.books = [];
+    let params = new HttpParams().set('category', value);
+    this.http.get<Array<Book>>(url + "books", { params: params }).subscribe(res => {
+      res.map(r => {
+        this.books.push(r);
+      })
+    }, (err) => {
+      this.spinner.hide();
+      console.log(err);
+    }, () => {
+      this.spinner.hide();
+      console.log(this.books);
+    })
+  }
+
+  getBooksByAuthor(value: string) {
+    this.spinner.show();
+    this.books = [];
+    let params = new HttpParams().set('author', value);
+    this.http.get<Array<Book>>(url + "books", { params: params }).subscribe(res => {
+      res.map(r => {
+        this.books.push(r);
+      })
+    }, (err) => {
+
+      console.log(err);
+    }, () => {
+      this.spinner.hide();
+      console.log(this.books);
+    })
+  }
+
+  getBooksByIsbn(value: string) {
+    this.spinner.show();
+    this.books = [];
+    let params = new HttpParams().set('isbn', value);
+    this.http.get<Array<Book>>(url + "books", { params: params }).subscribe(res => {
+      res.map(r => {
+        this.books.push(r);
+      })
+    }, (err) => {
+
+      console.log(err);
+    }, () => {
+      this.spinner.hide();
+      console.log(this.books);
     })
   }
 
@@ -45,7 +109,7 @@ export class MainService {
   }
 
   deleteBook(isbn: String) {
-    this.http.delete(url + "books?isbn=" + isbn).subscribe(r => {
+    this.http.delete(url + "books/" + isbn).subscribe(r => {
       //  console.log(r)
     }, err => { }, () => this.getBooks())
   }
@@ -64,15 +128,24 @@ export class MainService {
 
   getCategories() {
     this.categories = [];
-    let result = this.http.get<Array<Category>>(url + "categories").subscribe(res => {
+    this.http.get<Array<Category>>(url + "categories").subscribe(res => {
       res.map(r => {
-        //   console.log(r);
         this.categories.push(r);
       })
     }, err => { }, () => {
 
     })
+  }
 
+  getAuthors() {
+    this.authors = [];
+    this.http.get<Array<String>>(url + "books/authors").subscribe(res => {
+      res.map(r => {
+        this.authors.push(r);
+      })
+    }, err => { }, () => {
+
+    })
   }
 
   getBooksToChartArray(books: Array<Book>) {
@@ -119,6 +192,57 @@ export class MainService {
         allowHtml: true
       },
     };
+  }
+
+  saveToXLS(books: Array<Book>) {
+
+    this.spinner.show();
+    // let params = new HttpParams().set('file', "books1542387744077.xls");
+    this.http.post(url + "books/file/add", books).subscribe(res => {
+
+    }, (err) => {
+      this.spinner.hide();
+      console.log(err);
+    }, () => {
+      this.spinner.hide();
+    })
+  }
+
+
+  myfiles = new Array<Myfile>();
+  getFiles() {
+    this.myfiles = [];
+    this.spinner.show();
+    // let params = new HttpParams().set('file', "books1542387744077.xls");
+    this.http.get<Array<Myfile>>(url + "books/storage").subscribe(res => {
+      res.map(r => this.myfiles.push(r));
+    }, (err) => {
+      this.spinner.hide();
+      console.log(err);
+    }, () => {
+      this.spinner.hide();
+    })
+  }
+
+  onDelete(name: string) {
+    this.http.delete(url + "books/delete/" + name).subscribe(file => {
+      console.log(file);
+    }, err => { }, () => {
+      this.getFiles();
+    });
+  }
+
+  downloadFile(myfile: Myfile) {
+      this.spinner.show(); 
+    let params = new HttpParams().set('filename', myfile.fullPath);
+    this.http.get(url + "books/download", { params: params, responseType: 'blob' }).subscribe(res => {
+      saveAs(res, myfile.name);
+    }, (err) => {
+      this.spinner.hide();
+      console.log(err);
+    }, () => {
+         this.spinner.hide();     
+    })
   }
 
 }

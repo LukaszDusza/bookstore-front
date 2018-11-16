@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="form-group row">
+    <div class="form-group form-inline">
+      <!-- <small for="category">Category</small> -->
+      <select class="form-control form-control-sm" id="categoryFilter" name="categoryFilter" [(ngModel)]="filterService.filterCategory"
+        (change)="filterService.onCategoryChange()">
+        <option value="">category</option>
+        <option *ngFor="let category of mainService.categories">{{category.title}}</option>
+      </select> &nbsp;
+      <!-- </div>
+  <div class="form-group form-inline"> -->
+      <!-- <small for="author">Category</small> -->
+      <select class="form-control form-control-sm" id="authorFilter" name="authorFilter" [(ngModel)]="filterService.filterAuthor"
+        (change)="filterService.onAuthorChange()">
+        <option value="">author</option>
+        <option *ngFor="let author of mainService.authors">{{author}}</option>
+      </select>
+    </div>
+  </div>
+</div>

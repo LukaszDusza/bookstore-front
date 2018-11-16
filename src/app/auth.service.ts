@@ -28,16 +28,28 @@ export class AuthService {
   ) { }
 
   login(username: string, password: string) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post<User>(url, { username, password }, { headers: headers, observe: "response" }).subscribe(response => {
 
-      localStorage.setItem(token, response.headers.get('Authorization'));
-      this.loggedId$.next(true);
+    let user: User = {
+      username: username,
+      password: password
+    }
+
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set("cache-control", "no-cache");
+    console.log(user);
+    return this.http.post<User>(url, user, {
+      headers: headers,
+      observe: "response"
+    }).subscribe(response => {
+
       console.log(response);
+      localStorage.setItem(token, response.headers.get('Authorization'));
     }, err => {
+      console.log(err);
       this.loggedId$.next(false);
     }, () => {
-
+      this.loggedId$.next(true);
     });
 
   }

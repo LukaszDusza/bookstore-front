@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   form:FormGroup;
 
-  constructor(private auth: AuthService, private router: Router, private formBuilder: FormBuilder) { 
+  constructor(public auth: AuthService, private router: Router, private formBuilder: FormBuilder) { 
     this.auth.isLoggedId().subscribe((loggedIn: boolean) => {
       this.showErrorMessage = !loggedIn;
       if (loggedIn) {
